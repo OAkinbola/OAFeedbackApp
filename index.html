@@ -1,0 +1,286 @@
+<!--
+Mobile web development
+
+Created by: Olayimika Akinbola
+email:      oakinbola4906@conestogac.on.ca
+-->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OAFeedback</title>
+
+    <!--jquery-->
+    <script src="js/lib/jquery-2.1.4.js"></script>
+
+    <!--jquery mobile-->
+    <script src="js/lib/jquery.mobile-1.4.5.js"></script>
+
+    <!--jquery mobile styles-->
+    <link href="css/lib/jquery.mobile-1.4.5.css" rel="stylesheet">
+
+    <!--jquery validation-->
+    <script src="js/lib/jquery.validate.js"></script>
+
+    <!--my stuff-->
+    <script src="js/oadatabase.js"></script>
+    <script src="js/oaDAL.js"></script>
+    <script src="js/oafacade.js"></script>
+    <script src="js/oautil.js"></script>
+    <script src="js/oaglobal.js"></script>
+    <link rel="stylesheet" href="css/oamystyle.css">
+
+</head>
+
+<body>
+
+    <!--home page-->
+    <div id="oaHomepage" data-role="page">
+
+    <header data-role="header" data-position="fixed" data-theme="a">
+        <h1>OA Feedback A3</h1>
+
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#oaHomepage" data-icon="home" class="ui-btn-active ui-state-persist">Home</a></li>
+                <li><a href="#oaAddFeedbackPage" data-icon="plus">Add</a></li>
+                <li><a href="#oaViewFeedbackPage" data-icon="grid">Reviews</a></li>
+                <li><a href="#oaSettingsPage" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    <section data-role="content">
+        <h1>Olayimika Akinbola's Feedback A3 App</h1>
+        <p> Welcome to the Olayimika Akinbola's Feedback A3 app
+            a prototype designed for mobile programming class.
+            This is the first iteration of the app to keep track of different
+            places you visited along with your reviews
+        </p>
+            <img src="img/OA-image.png" alt="">
+
+        <p>please feel free to contact me if you have any suggestions! </p>
+
+        <a href="#" data-role="button" data-icon="plus" data-iconpos="left">Call:647.807.6840</a>
+        <a href="#" data-role="button" data-icon="plus" data-iconpos="left">oakinbola4906@conestogc.on.ca</a>
+        <p>Website:</p>
+        <a href="#" data-role="button" data-icon="plus" data-iconpos="left">Conestoga College</a>
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="a">
+        <h1>&copy; 2022 Olayimika Akinbola</h1>
+    </footer>
+</div>
+
+
+    <!--Add Feedback page-->
+    <div id="oaAddFeedbackPage" data-role="page">
+
+    <header data-role="header" data-position="fixed" data-theme="a">
+        <h1>Add a Feedback</h1>
+
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#oaHomepage" data-icon="home" >Home</a></li>
+                <li><a href="#oaAddFeedbackPage" data-icon="plus" class="ui-btn-active ui-state-persist">Add</a></li>
+                <li><a href="#oaViewFeedbackPage" data-icon="grid">Reviews</a></li>
+                <li><a href="#oaSettingsPage" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section data-role="content">
+        <form id="oaFrmAdd" name="oaFrmAdd" method="post" action="">
+
+            <label for="businessName">Business Name:</label>
+            <input type="text" id="businessName" name="businessName" ><br>
+
+            <label for="cmbType">Type:</label>
+            <select id="cmbType" name="cmbType" data-native-menu="true">
+
+            </select>
+
+            <label for="reviewerEmail">Reviewer Email:</label>
+            <input type="text" id="reviewerEmail" name="reviewerEmail"><br>
+
+            <label for="reviewerComments">Reviewer Comments:</label>
+            <textarea id="reviewerComments" name="reviewerComments" cols="40" rows="8"></textarea> <br>
+
+            <label for="reviewDate">Review Date:</label>
+            <input type="date" id="reviewDate" name="reviewDate" data-clear-btn="true" >
+
+            <label for="ratings">Do you want to add your Ratings?</label>
+            <input type="checkbox" id="ratings" name="ratings" data-iconpos="left">
+
+            <div id="customerFeedback" style="display: none" >
+                <label for="quality">Food Quality (0-5):</label>
+                <input type="number" id="quality" name="quality" value="0">
+
+                <label for="service">Service (0-5):</label>
+                <input type="number" id="service" name="service" value="0">
+
+                <label for="value">Value (0-5):</label>
+                <input type="number" id="value" name="value" value="0">
+
+                <label for="overallRatings">Overall Rating (Calculated) </label>
+                <input type="text" id="overallRatings" name="overallRatings" readonly  >
+            </div>
+
+            <button type="button"  id="btnSave" name="btnSave" class="ui-btn-active" style="width:8em">save</button>
+
+        </form>
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="a">
+        <h1>&copy; 2022 Olayimika Akinbola</h1>
+    </footer>
+</div>
+
+
+   <!--ViewFeedbackPage-->
+   <div id="oaViewFeedbackPage" data-role="page">
+
+    <header data-role="header" data-position="fixed" data-theme="a">
+        <h1>List of Reviews</h1>
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#oaHomepage" data-icon="home">Home</a></li>
+                <li><a href="#oaAddFeedbackPage" data-icon="plus" >Add</a></li>
+                <li><a href="#oaViewFeedbackPage" data-icon="grid" class="ui-btn-active ui-state-persist" >Reviews</a></li>
+                <li><a href="#oaSettingsPage" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section data-role="content" >
+
+        <ul data-role="listview" data-inset="true" id="1stViewFeedback">
+        </ul>
+        <div id="record" style="display: none">
+            <h2>No record found</h2>
+        </div>
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="a">
+        <h1>&copy; 2022 Olayimika Akinbola</h1>
+    </footer>
+</div>
+
+
+   <!--ModifyFeedbackPage.  -->
+   <div id="oaModifyFeedbackPage" data-role="page">
+
+    <header data-role="header" data-position="fixed" data-theme="a">
+        <h1>Modify Feedback</h1>
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#oaHomepage" data-icon="home">Home</a></li>
+                <li><a href="#oaAddFeedbackPage" data-icon="plus" >Add</a></li>
+                <li><a href="#oaViewFeedbackPage" data-icon="grid" class="ui-btn-active ui-state-persist" >Reviews</a></li>
+                <li><a href="#oaSettingsPage" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section data-role="content" >
+
+        <form id="oaModifyForm" name="oaModifyForm">
+
+            <div hidden>
+                <label for="txtId">Id </label>
+                <input type="text" id="txtId" name="txtId"
+                       class="required" data-theme="a" data-clear-btn="true" placeholder="Enter ID">
+            </div>
+
+            <label for="modifyName">Business Name:</label>
+            <input type="text" id="modifyName" name="modifyName" data-clear-btn="true"><br>
+
+            <label for="modifyType">Type:</label>
+            <select name="modifyType" id="modifyType" data-native-menu="true">
+            </select>
+
+            <label for="modifyEmail">Reviewer Email:</label>
+            <input type="text" id="modifyEmail" name="modifyEmail" data-clear-btn="true"><br>
+
+            <label for="modifyComments">Reviewer Comments:</label>
+            <textarea id="modifyComments" name="modifyComments" ></textarea><br>
+
+            <label for="modifyDate">Review Date:</label>
+            <input type="date" id="modifyDate" name="modifyDate" data-clear-btn="true">
+
+            <label for="modifyRatings">Do you want to add your Ratings?</label>
+            <input type="checkbox" id="modifyRatings" name="modifyRatings" data-iconpos="left">
+
+            <div id="modifyFeedback" style="display: none">
+                <label for="modifyQuality">Food Quality (0-5):</label>
+                <input type="number" id="modifyQuality" name="modifyQuality"  value="0">
+
+                <label for="modifyService">Service (0-5):</label>
+                <input type="number" id="modifyService" name="modifyService"  value="0">
+
+                <label for="modifyValue">Value (0-5):</label>
+                <input type="number" id="modifyValue" name="modifyValue" value="0">
+
+                <label for="modifyOverallRatings">Overall Rating (Calculated) </label>
+                <input type="text" id="modifyOverallRatings" name="modifyOverallRatings" readonly >
+            </div>
+
+        </form>
+
+        <div data-role="controlgroup" data-type="horizontal">
+            <button data-role="button"                       id="BtnCancel" name="BtnCancel" onclick="history.back()" >Cancel</button>
+            <button data-role="button" data-theme="b"        id="BtnDelete" name="BtnDelete">Delete</button>
+            <button data-role="button" class="ui-btn-active" id="btnUpdate" name="btnUpdate"> Update</button>
+        </div>
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="a">
+        <h1>&copy; 2022 Olayimika Akinbola</h1>
+    </footer>
+</div>
+
+
+   <!--Settings page-->
+   <div id="oaSettingsPage" data-role="page">
+
+    <header data-role="header" data-position="fixed" data-theme="a">
+        <h1>Settings</h1>
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#oaHomepage" data-icon="home">Home</a></li>
+                <li><a href="#oaAddFeedbackPage" data-icon="plus" >Add</a></li>
+                <li><a href="#oaViewFeedbackPage" data-icon="grid"  >Reviews</a></li>
+                <li><a href="#oaSettingsPage" data-icon="gear" class="ui-btn-active ui-state-persist">Settings</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section data-role="content">
+
+        <label for="defaultEmail">Default reviewer Email:</label>
+
+        <input type="text"     id="defaultEmail" name="defaultEmail" value="oakinbola4906@conestogac.on.ca">
+
+        <button type="button"  id="btnDefaults"  name="btnDefaults"  data-role="button" class="ui-btn-active">save Defaults</button>
+
+        <button type="button"  id="btnClear"     name="btnClear"     data-role="button"  data-theme="b"  >Clear Database</button>
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="a">
+        <h1>&copy; 2022 Olayimika Akinbola</h1>
+    </footer>
+
+</div>
+
+
+</body>
+
+
+</html>
